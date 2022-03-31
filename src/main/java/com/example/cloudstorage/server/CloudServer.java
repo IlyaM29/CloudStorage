@@ -1,6 +1,5 @@
 package com.example.cloudstorage.server;
 
-import com.example.cloudstorage.handler.CloudMessageHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -8,13 +7,12 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.serialization.ClassResolver;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import lombok.extern.slf4j.Slf4j;
 
-//@Slf4j
+@Slf4j
 public class CloudServer {
 
     public static void main(String[] args) {
@@ -27,7 +25,7 @@ public class CloudServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        protected void initChannel(SocketChannel socketChannel) {
                             socketChannel.pipeline().addLast(
                                     new ObjectEncoder(),
                                     new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
@@ -36,7 +34,7 @@ public class CloudServer {
                         }
                     });
             ChannelFuture future = bootstrap.bind(8189).sync();
-//            log.debug("Server started...");
+            log.debug("Server started...");
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
