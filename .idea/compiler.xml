@@ -2,14 +2,20 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CloudStorage" />
+        <module name="cloud_client" />
+        <module name="cloud_message" />
+        <module name="cloud_server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="cloud_client" target="11" />
+      <module name="cloud_message" target="11" />
+      <module name="cloud_server" target="11" />
       <module name="CloudStorage" target="11" />
     </bytecodeTargetLevel>
   </component>

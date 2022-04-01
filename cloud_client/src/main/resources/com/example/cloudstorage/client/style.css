@@ -1,0 +1,18 @@
+.menu {
+    -fx-background-color: #2D3E50;
+}
+
+.button {
+    -fx-background-color: #6DBCDB;
+    -fx-background-radius: 10;
+    -fx-border-color: #D6DADB;
+    -fx-border-radius: 10;
+}
+
+.button:hover {
+    -fx-background-color: #FC4349;
+}
+
+.button:pressed {
+    -fx-background-color: #2D3E50;
+}

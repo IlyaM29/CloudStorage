@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cloudstorage.client.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="200.0" style="-fx-padding: 0;" styleClass="menu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <Text fill="#d6dadb" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Сетевое хранилище" textAlignment="CENTER" wrappingWidth="199.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+      <font>
+         <Font name="Arial Bold" size="18.0" />
+      </font>
+   </Text>
+   <Button layoutY="90.0" mnemonicParsing="false" onAction="#download" prefHeight="25.0" text="Скачать" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+   <Button layoutY="120.0" mnemonicParsing="false" onAction="#upload" prefHeight="25.0" text="Загрузить" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+   <Button layoutY="150.0" mnemonicParsing="false" onAction="#newDir" prefHeight="25.0" text="Создать папку" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+</AnchorPane>
+<AnchorPane layoutX="200.0" style="-fx-background-color: #D6DADB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <Button layoutX="14.0" layoutY="13.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#dirBack" style="-fx-background-color: #FC4349; -fx-background-radius: 5; -fx-border-color: #2D3E50; -fx-border-radius: 5;" text="&lt;">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+   <TextField fx:id="serverPath" editable="false" layoutX="39.0" layoutY="13.0" prefHeight="25.0" prefWidth="345.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="13.0" />
+   <ListView fx:id="serverView" layoutX="14.0" layoutY="47.0" prefHeight="337.0" prefWidth="370.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="47.0" />
+</AnchorPane>
+</AnchorPane>
