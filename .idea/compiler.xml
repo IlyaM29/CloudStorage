@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="cloud_client" />
         <module name="cloud_message" />
-        <module name="CloudStorage" />
         <module name="cloud_server" />
       </profile>
     </annotationProcessing>
