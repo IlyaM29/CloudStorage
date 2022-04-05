@@ -1,0 +1,26 @@
+.menu {
+    -fx-background-color: #2D3E50;
+	-fx-padding: 0;
+}
+
+.body {
+    -fx-background-color: #D6DADB;
+}
+
+.button {
+    -fx-background-color: #6DBCDB;
+    -fx-background-radius: 10;
+}
+
+.button:hover {
+    -fx-background-color: #FC4349;
+}
+
+.button:pressed {
+    -fx-background-color: #2D3E50;
+}
+
+.button-back {
+    -fx-background-color: #FC4349;
+    -fx-background-radius: 5;
+}

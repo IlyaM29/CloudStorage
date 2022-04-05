@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CloudStorage.iml" filepath="$PROJECT_DIR$/CloudStorage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud_client/cloud_client.iml" filepath="$PROJECT_DIR$/cloud_client/cloud_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud_message/cloud_message.iml" filepath="$PROJECT_DIR$/cloud_message/cloud_message.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud_server/cloud_server.iml" filepath="$PROJECT_DIR$/cloud_server/cloud_server.iml" />
     </modules>
   </component>
 </project>
