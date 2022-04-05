@@ -7,8 +7,8 @@ import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -22,19 +22,17 @@ public class Controller extends Component implements Initializable {
 
     public ListView<String> serverView;
     public TextField serverPath;
-
+    public TextField newDir;
     private Path clientDir;
-
     private ObjectEncoderOutputStream oos;
     private ObjectDecoderInputStream ois;
-
     private JFileChooser fileChooser;
 
     public void download() throws IOException {
         fileChooser.setDialogTitle("Выбор директории");
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int result = fileChooser.showOpenDialog(Controller.this);
-        if (result == JFileChooser.APPROVE_OPTION ) {
+        if (result == JFileChooser.APPROVE_OPTION) {
             clientDir = fileChooser.getSelectedFile().toPath();
             oos.writeObject(new FileRequest(serverView.getSelectionModel().getSelectedItem()));
         }
@@ -44,7 +42,7 @@ public class Controller extends Component implements Initializable {
         fileChooser.setDialogTitle("Сохранение файла");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int result = fileChooser.showSaveDialog(Controller.this);
-        if (result == JFileChooser.APPROVE_OPTION ) {
+        if (result == JFileChooser.APPROVE_OPTION) {
             oos.writeObject(new FileMessage(fileChooser.getSelectedFile().toPath()));
         }
     }
@@ -108,6 +106,28 @@ public class Controller extends Component implements Initializable {
     }
 
     public void newDir() {
-        // дописать
+        newDir.setVisible(true);
+        newDir.requestFocus();
+    }
+
+    public void keyPress(KeyEvent keyEvent) throws IOException {
+        switch (keyEvent.getCode()) {
+            case ENTER:
+                if (newDir.getText().length() != 0) {
+                    oos.writeObject(new DirMessage(newDir.getText()));
+                }
+                newDir.setVisible(false);
+                break;
+            case ESCAPE:
+                newDir.setVisible(false);
+                break;
+        }
+    }
+
+    public void remove() throws IOException {
+        if (!serverView.getSelectionModel().isEmpty()) {
+            String item = serverView.getSelectionModel().getSelectedItem();
+            oos.writeObject(new RemoveMessage(item));
+        }
     }
 }

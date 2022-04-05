@@ -48,7 +48,19 @@ public class CloudMessageHandler extends SimpleChannelInboundHandler<CloudMessag
                     currentDir = currentDir.resolve(dm.getDirectory());
                     ctx.writeAndFlush(new DirMessage(currentDir.toString()));
                     ctx.writeAndFlush(new ListMessage(currentDir));
+                    break;
                 }
+                if (!Files.exists(currentDir.resolve(dm.getDirectory()))) {
+                    Files.createDirectories(currentDir.resolve(dm.getDirectory()));
+                    ctx.writeAndFlush(new ListMessage(currentDir));
+                    break;
+                }
+                break;
+            case REMOVE:
+                RemoveMessage rm = (RemoveMessage) cloudMessage;
+                Path f = currentDir.resolve(rm.getDirectory());
+                Files.delete(f);
+                ctx.writeAndFlush(new ListMessage(currentDir));
                 break;
         }
     }
