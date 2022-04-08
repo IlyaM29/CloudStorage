@@ -3,23 +3,23 @@ package com.example.cloudstorage.client;
 import com.example.cloudstorage.model.*;
 import io.netty.handler.codec.serialization.ObjectDecoderInputStream;
 import io.netty.handler.codec.serialization.ObjectEncoderOutputStream;
-import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 public class Controller extends Component implements Initializable {
 
+    private final ClientReader reader = new ClientReader(this);
     public ListView<String> serverView;
     public TextField serverPath;
     public TextField newDir;
@@ -51,23 +51,7 @@ public class Controller extends Component implements Initializable {
         try {
             while (true) {
                 CloudMessage msg = (CloudMessage) ois.readObject();
-                switch (msg.getMessageType()) {
-                    case FILE:
-                        FileMessage fm = (FileMessage) msg;
-                        Files.write(clientDir.resolve(fm.getName()), fm.getBytes());
-                        break;
-                    case LIST:
-                        ListMessage lm = (ListMessage) msg;
-                        Platform.runLater(() -> {
-                            serverView.getItems().clear();
-                            serverView.getItems().addAll(lm.getFiles());
-                        });
-                        break;
-                    case DIRECTORY:
-                        DirMessage dm = (DirMessage) msg;
-                        serverPath.setText(dm.getDirectory());
-                        break;
-                }
+                reader.map.get(msg.getMessageType()).doSmth(msg);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,5 +113,9 @@ public class Controller extends Component implements Initializable {
             String item = serverView.getSelectionModel().getSelectedItem();
             oos.writeObject(new RemoveMessage(item));
         }
+    }
+
+    public Path getClientDir() {
+        return clientDir;
     }
 }
